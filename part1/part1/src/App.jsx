@@ -1,4 +1,8 @@
 import Welcome from "./Components/Welcome";
+import { BrowserRouter as Router,Routes, Route,Link } from "react-router-dom";
+import Contact from './Pages/Contact';
+import AbouMet from "./Pages/AboutMe";
+import Profile from "./Pages/Profile";
 
 
 
@@ -36,8 +40,32 @@ const App =() => {
        <footer/>
        <MyButton />
        <Welcome message = "Hola welcome props" name ="Isabella" />
-        
-      </div>
+       <Router>
+        <div>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li> 
+            <li>
+              <Link to="/contact">Contact</Link>
+            </li> 
+            <li>
+              <Link to="/About-me">About Me</Link>
+            </li>
+            <li>
+              <Link to="/profile">Profile</Link>
+            </li>
+          </ul>
+        </div>
+        <Routes>
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/about-me"   element={<AbouMet />} />
+          <Route path="/profile/:name" element={<Profile />} />
+        </Routes>
+       </Router> 
+      </div> 
+
+      
     )
 }
 
