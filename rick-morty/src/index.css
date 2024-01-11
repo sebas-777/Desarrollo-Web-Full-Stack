@@ -30,6 +30,7 @@ body {
   min-height: 2.778em;
   border: none;
   cursor: pointer;
+  margin-bottom: 20px;
 }
 
 .btn-search:hover {
