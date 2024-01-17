@@ -8,7 +8,11 @@ function IngredientList(props) {
     const ingredientList = props.ingredients.map((ingredient, index) =>{
         return(
             // Return the desired HTML for each ingredient
-            <li key={index} className={ingredient.prepared ? 'prepared' : ''}>
+            <li key={index} 
+            className={ingredient.prepared ? 'prepared' : ''}
+             // TODO: Add onClick event
+             onClick={ () => props.onClick(index) }
+            >
                 {ingredient.name}
             </li>
         );

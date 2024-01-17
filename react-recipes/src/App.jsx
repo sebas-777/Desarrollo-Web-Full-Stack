@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 //TODO: Add import for RecipeTitle
 import RecipeTitle from './RecipeTitle';
 import Menu from './Menu';
@@ -9,7 +9,7 @@ import RecipeSteps from './RecipeSteps';
 function App() {
   
     //TODO: Add recipe object
-    const recipe = {
+    const initialRecipe = {
         title:'Mashed potatoes',
         feedback:{
             rating:4.8,
@@ -32,12 +32,41 @@ function App() {
             {step:'7. Mash the potatoes.'},
             {step:'8. Re-season and add butter and cream to taste.'},
         ]
-    }
+    } 
+
+    //TODO: Create recipe state 
+    const [recipe,setRecipe] = useState(initialRecipe);
+
+     // TODO: Add new state property
+     const [prepared,setPrepared] = useState(false);
+
+     // TODO: Create ingredientClick event listener
+     function ingredientClick(index){ 
+        const updatedRecipe = { ... recipe};
+        updatedRecipe.ingredients[index].prepared = !updatedRecipe.ingredients[index].prepared;
+        setRecipe(updatedRecipe);
+
+     } 
+
+     // TODO: Add the effect hook 
+     useEffect(() =>{
+        setPrepared(recipe.ingredients.every(i => i.prepared));
+     },[recipe]);
+
+
     return (
     <article> 
         <h1>Recipe Manger</h1>
+
+        {/* TODO: Pass recipe metadata to RecipeTitle  */}
         <RecipeTitle title={recipe.title} feedback={recipe.feedback} /> 
-        <IngredientList ingredients={recipe.ingredients} />
+
+        {/* TODO: Pass ingredients and event listener to IngredientList */}
+         <IngredientList ingredients={recipe.ingredients} onClick={ ingredientClick} />
+
+        {/* TODO: Add the prep work display */} 
+        {prepared ? <h2>Prep work done!</h2> : <h2>Just Keep choping</h2>}
+        
         <RecipeSteps prepare={recipe.prepare} />
         <div>
             <Menu/>
